@@ -1,40 +1,49 @@
-# Analiza Sprzedaży Walmart
+Analiza Sprzedaży Walmart
+🎯 Cel projektu
+Celem analizy było zrozumienie wpływu świąt na sprzedaż w sieci sklepów Walmart oraz identyfikacja sklepów o najwyższej i najniższej wydajności w oparciu o dostarczony zbiór danych. Projekt koncentruje się na budowie pipeline'u analitycznego: od czyszczenia danych, przez ich agregację, aż po automatyzację raportowania.
 
-## Cel projektu
-Celem analizy było zrozumienie wpływu świąt na sprzedaż w sieci sklepów Walmart oraz identyfikacja sklepów o najwyższej i najniższej wydajności w oparciu o dostarczony zbiór danych.
+🛠 Wykorzystane technologie
+SQL (Microsoft SQL Server / T-SQL)
 
-## Wykorzystane technologie
-- SQL (Microsoft SQL Server)
-- Git / GitHub (Wersjonowanie projektu)
-- VS Code (Edycja i dokumentacja)
+Git / GitHub (Wersjonowanie kodu)
 
-## Źródło danych
-Dane pochodzą z publicznego zbioru "Walmart Sales Dataset" (Kaggle).
+VS Code (Edycja i dokumentacja)
 
-## Proces analizy
-1. **Eksploracja**: Sprawdzenie struktury danych i unikalności rekordów.
-2. **Agregacja**: Obliczenie kluczowych wskaźników (KPI) – suma sprzedaży, średnia temperatura.
-3. **Analiza**: Kategoryzacja danych za pomocą instrukcji warunkowych `CASE WHEN`.
-4. **Etykietowanie**: Tworzenie czytelnych nazw dla flag świątecznych.
-## 🔍 Etap 5: Relacje i Czyszczenie Danych (Data Cleaning)
+📊 Wyniki analizy
+W folderze results/ znajduje się plik Wyniki.csv, zawierający podsumowanie wydajności sklepów (agregacje, rankingi), będące efektem końcowym przeprowadzonych zapytań SQL.
 
-W tym etapie skupiłem się na łączeniu rozproszonych zbiorów danych oraz weryfikacji ich jakości.
+📈 Proces analizy (Etapy pracy)
+Analiza została podzielona na logiczne etapy, aby zapewnić czytelność i łatwość konserwacji kodu:
 
-- **Wykorzystanie LEFT JOIN:** Zastosowałem złączenia, aby wzbogacić dane o transakcjach o informacje o typach sklepów. Wybór `LEFT JOIN` był podyktowany chęcią zachowania wszystkich rekordów sprzedaży, nawet tych, dla których brakowało metadanych.
-- **Data Quality Check:** Zaimplementowałem zapytanie identyfikujące "sieroty" (transakcje bez przypisanych metadanych), co jest kluczowe w procesie utrzymania czystości bazy danych.
-- **Logika Biznesowa:** Użyłem instrukcji `CASE WHEN` do stworzenia nowej kolumny segmentującej sklepy, co ułatwia analizę wydajności w podziale na typy placówek.
+Eksploracja (01_explore.sql): Sprawdzenie struktury danych i unikalności rekordów.
 
+Agregacja (02_aggregation.sql): Obliczenie kluczowych wskaźników (KPI).
 
-## Kluczowe wnioski (Insights)
-- **Wpływ świąt:** Sprzedaż w okresie świątecznym wzrosła średnio o 7,8% w porównaniu do okresów bez świąt, co potwierdza pozytywny wpływ kampanii świątecznych.
-- **Lider sprzedaży:** Sklep nr 20 wykazuje najwyższą średnią sprzedaż (ok. 2,1 mln USD), co czyni go kluczowym punktem w analizie operacyjnej.
-- **Wpływ temperatury:** Analiza wykazała istotną zależność: sprzedaż jest najwyższa w okresach zimnych (<40 stopni) i systematycznie spada wraz ze wzrostem temperatury. Sugeruje to, że czynniki sezonowe (np. okresy świąteczne przypadające na zimę) mają silniejszy wpływ na decyzje zakupowe niż sama temperatura.
+Analiza (03_analysis.sql): Kategoryzacja danych za pomocą instrukcji CASE WHEN.
 
+Relacje i Jakość (05_joins_and_data_quality.sql): Zastosowanie LEFT JOIN w celu połączenia metadanych i obsługa braków danych.
 
-## Jak uruchomić projekt
-1. Zaimportuj plik `Walmart_Sales.csv` do SQL Server.
-2. Uruchom skrypty w kolejności:
-   - `01_explore.sql`
-   - `02_aggregation.sql`
-   - `03_analysis.sql`
-   - `04_data_labels.sql`
+Automatyzacja (06_views.sql): Stworzenie widoków (Views) w celu uproszczenia dostępu do złożonych zapytań.
+
+Interaktywność (07_stored_procedures.sql): Implementacja procedur składowanych dla dynamicznego odpytywania danych.
+
+Zaawansowana Analityka (08_advanced_analysis.sql): Wykorzystanie funkcji okienkowych (RANK()) do tworzenia rankingów sprzedaży.
+
+💡 Kluczowe wnioski (Insights)
+Wpływ świąt: Sprzedaż w okresie świątecznym wzrosła średnio o 7,8%, co potwierdza skuteczność kampanii świątecznych.
+
+Lider sprzedaży: Sklep nr 20 wykazuje najwyższą średnią sprzedaż (ok. 2,1 mln USD).
+
+Wpływ temperatury: Sprzedaż jest najwyższa w okresach zimnych (<40 stopni). Sugeruje to, że czynniki sezonowe mają silniejszy wpływ na decyzje zakupowe niż sama temperatura.
+
+🚀 Jak uruchomić projekt
+Zaimportuj plik Walmart_Sales.csv do SQL Server.
+
+Uruchom skrypty w folderze sql_scripts/ w kolejności numerycznej:
+
+01_... do 08_...
+
+Wyniki analizy są dostępne w tabelach lub widokach stworzonych przez skrypty. Przykładowy raport:
+
+SQL
+SELECT * FROM View_Store_Performance;
