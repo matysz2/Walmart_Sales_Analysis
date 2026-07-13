@@ -1,52 +1,151 @@
-Analiza Sprzedaży Walmart
-
+📊 Walmart Sales Analysis
 🎯 Cel projektu
-Celem analizy było zrozumienie wpływu świąt na sprzedaż w sieci sklepów Walmart oraz identyfikacja sklepów o najwyższej i najniższej wydajności w oparciu o dostarczony zbiór danych. Projekt koncentruje się na budowie pipeline'u analitycznego: od czyszczenia danych, przez ich agregację, aż po automatyzację raportowania.
+
+Projekt prezentuje proces analizy sprzedaży sieci sklepów Walmart z wykorzystaniem SQL Server oraz Power BI.
+
+Celem było:
+
+analiza sprzedaży poszczególnych sklepów,
+sprawdzenie wpływu świąt na sprzedaż,
+analiza zależności pomiędzy wielkością sklepu a sprzedażą,
+przygotowanie czytelnego raportu Power BI,
+zastosowanie dobrych praktyk SQL i analizy danych.
+
+Projekt został wykonany jako element portfolio Junior Data Analyst.
 
 🛠 Wykorzystane technologie
-SQL (Microsoft SQL Server / T-SQL)
+Microsoft SQL Server (T-SQL)
+Power BI
+Git / GitHub
+Visual Studio Code
+CSV
+📁 Struktura projektu
+.
+├── data/
+│   ├── stores.csv
+│   └── Walmart_Sales.csv
+│
+├── images/
+│   ├── sprzedaż_wg_asortymentu.png
+│   ├── sprzedaż_wg_ceny_paliwa.png
+│   ├── sprzedaż_wg_miesiąca.png
+│   ├── sprzedaż_wg_wielkości_sklepu.png
+│   └── sprzedaż_wg_świąt.png
+│
+├── powerbi/
+│   └── Walmart_Analysis.pbix
+│
+├── results/
+│   └── Wyniki.csv
+│
+└── sql_scripts/
+    ├── 01_explore.sql
+    ├── 02_aggregation.sql
+    ├── 03_analysis.sql
+    ├── 04_data_labels.sql
+    ├── 05_joins_and_data_quality.sql
+    ├── 06_views.sql
+    ├── 07_stored_procedures.sql
+    ├── 08_advanced_analysis.sql
+    └── 09_data_quality_checks.sql
+📊 Proces analizy
 
-Git / GitHub (Wersjonowanie kodu)
+Analiza została podzielona na kolejne etapy:
 
-VS Code (Edycja i dokumentacja)
+1. Eksploracja danych
+sprawdzenie struktury danych,
+liczby rekordów,
+brakujących wartości,
+unikalności danych.
 
-📊 Wyniki analizy
-W folderze results/ znajduje się plik Wyniki.csv, zawierający podsumowanie wydajności sklepów (agregacje, rankingi), będące efektem końcowym przeprowadzonych zapytań SQL.
+Plik: 01_explore.sql
 
-📈 Proces analizy (Etapy pracy)
-Analiza została podzielona na logiczne etapy, aby zapewnić czytelność i łatwość konserwacji kodu:
+2. Agregacja
 
-1.Eksploracja (01_explore.sql): Sprawdzenie struktury danych i unikalności rekordów.
+Obliczenie podstawowych wskaźników:
 
-2.Agregacja (02_aggregation.sql): Obliczenie kluczowych wskaźników (KPI).
+średnia sprzedaż,
+suma sprzedaży,
+liczba transakcji,
+sprzedaż według sklepu.
 
-3.Analiza (03_analysis.sql): Kategoryzacja danych za pomocą instrukcji CASE WHEN.
+Plik: 02_aggregation.sql
 
-4.Relacje i Jakość (05_joins_and_data_quality.sql): Zastosowanie LEFT JOIN w celu połączenia metadanych i obsługa braków danych.
+3. Analiza danych
 
-5.Automatyzacja (06_views.sql): Stworzenie widoków (Views) w celu uproszczenia dostępu do złożonych zapytań.
+Wykorzystanie instrukcji:
 
-6.Interaktywność (07_stored_procedures.sql): Implementacja procedur składowanych dla dynamicznego odpytywania danych.
+CASE WHEN
+GROUP BY
+HAVING
 
-7.Zaawansowana Analityka (08_advanced_analysis.sql): Wykorzystanie funkcji okienkowych (RANK()) do tworzenia rankingów sprzedaży.
+do klasyfikacji danych.
 
-8.Kontrola jakości (09_data_quality_checks.sql): Implementacja skryptów weryfikujących spójność danych i wykrywających anomalie (duplikaty, ujemne wartości sprzedaży).
+Plik: 03_analysis.sql
 
-💡 Kluczowe wnioski (Insights)
-Wpływ świąt: Sprzedaż w okresie świątecznym wzrosła średnio o 7,8%, co potwierdza skuteczność kampanii świątecznych.
+4. Łączenie danych
 
-Lider sprzedaży: Sklep nr 20 wykazuje najwyższą średnią sprzedaż (ok. 2,1 mln USD).
+Połączenie tabel sprzedaży z metadanymi sklepów przy użyciu:
 
-Wpływ temperatury: Sprzedaż jest najwyższa w okresach zimnych (<40 stopni). Sugeruje to, że czynniki sezonowe mają silniejszy wpływ na decyzje zakupowe niż sama temperatura.
+LEFT JOIN
 
+oraz analiza jakości danych.
+
+Plik: 05_joins_and_data_quality.sql
+
+5. Widoki SQL
+
+Przygotowanie widoków ułatwiających późniejszą analizę.
+
+Plik: 06_views.sql
+
+6. Procedury składowane
+
+Automatyzacja najczęściej wykonywanych analiz.
+
+Plik: 07_stored_procedures.sql
+
+7. Zaawansowana analiza
+
+Wykorzystanie funkcji okienkowych:
+
+RANK()
+DENSE_RANK()
+ROW_NUMBER()
+
+do tworzenia rankingów sklepów.
+
+Plik: 08_advanced_analysis.sql
+
+8. Kontrola jakości danych
+
+Sprawdzenie:
+
+duplikatów,
+braków danych,
+ujemnych wartości sprzedaży,
+spójności danych.
+
+Plik: 09_data_quality_checks.sql
+
+📈 Dashboard Power BI
+
+Raport Power BI zawiera między innymi:
+
+sprzedaż według sklepu,
+sprzedaż w okresach świątecznych,
+sprzedaż według miesiąca,
+wpływ wielkości sklepu na sprzedaż,
+wpływ ceny paliwa,
+analizę asortymentu.
+💡 Najważniejsze wnioski
+Sklepy różnią się poziomem sprzedaży — część osiąga znacznie wyższe wyniki niż pozostałe.
+W okresach świątecznych sprzedaż jest przeciętnie wyższa niż poza nimi.
+Większe sklepy często osiągają wyższą sprzedaż, jednak sama powierzchnia nie wyjaśnia wszystkich różnic.
+Temperatura i cena paliwa mogą wpływać na sprzedaż, jednak zależność nie jest jednoznaczna.
 🚀 Jak uruchomić projekt
-Zaimportuj plik Walmart_Sales.csv do SQL Server.
-
-Uruchom skrypty w folderze sql_scripts/ w kolejności numerycznej:
-
-01_... do 08_...
-
-Wyniki analizy są dostępne w tabelach lub widokach stworzonych przez skrypty. Przykładowy raport:
-
-SQL
-SELECT * FROM View_Store_Performance;
+Zaimportuj pliki z katalogu data/ do Microsoft SQL Server.
+Uruchom skrypty z katalogu sql_scripts/ w kolejności od 01 do 09.
+Otwórz plik Walmart_Analysis.pbix w Power BI Desktop.
+Odśwież źródła danych.
+Przeglądaj przygotowany dashboard.
